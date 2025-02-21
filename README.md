@@ -28,8 +28,8 @@ Ensure you have Python and Selenium installed, run:
 pip install selenium
 ```
 
-### 2. Set Up Chrome for Remote Debugging
-The bot connects to an **already open Chrome browser**. To allow this:
+### 2. Run chrome in debug mode
+The bot connects to an **already open Chrome browser**. To do this:
 - **Close all Chrome windows**
 - Run Chrome in debugging mode:
   ```sh
@@ -39,6 +39,7 @@ The bot connects to an **already open Chrome browser**. To allow this:
   ```sh
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir="/tmp/ChromeProfile"
   ```
+  - On new chrome window open conjuguemos and assignment wanted to automate **BEFORE** running
 
 ## Usage
 ### Run the script in terminal:
@@ -63,4 +64,7 @@ python translator_bot.py
 
 ### Error: "Could not attach to Chrome"
 - Chrome **must be running in debugging mode** (`--remote-debugging-port=9222`).
+
+### Other Error/Can't find fix:
+- Do the assignment manually you lazy cheater
 
