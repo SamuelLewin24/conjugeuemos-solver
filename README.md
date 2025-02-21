@@ -31,12 +31,12 @@ pip install selenium
 ### 2. Run chrome in debug mode
 The bot connects to an **already open Chrome browser**. To do this:
 
-- Run:
+Run python file to open chrome in debug mode:
   ```sh
-  launch_chrome_debug.py
+  pyhotn launch_chrome_debug.py
   ```
 
-Alternatively, Run Manually:
+Alternatively, run manually:
   ```sh
   cd C:\Program Files\Google\Chrome\Application\
   chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\ChromeProfile"
