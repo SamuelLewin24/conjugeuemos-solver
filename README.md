@@ -30,22 +30,30 @@ pip install selenium
 
 ### 2. Run chrome in debug mode
 The bot connects to an **already open Chrome browser**. To do this:
-- **Close all Chrome windows**
-- Run Chrome in debugging mode:
+
+- Run:
   ```sh
+  launch_chrome_debug.py
+  ```
+
+Alternatively, Run Manually:
+  ```sh
+  cd C:\Program Files\Google\Chrome\Application\
   chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\ChromeProfile"
   ```
   *(On Mac/Linux, use:)*
   ```sh
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir="/tmp/ChromeProfile"
   ```
-  - On new chrome window open conjuguemos and assignment wanted to automate **BEFORE** running
+  
+### On new chrome window, open conjuguemos assignment **BEFORE** running
 
 ## Usage
 ### Run the script in terminal:
 ```sh
 python translator_bot.py
 ```
+
 ### What Happens:
 1. The bot extracts the Spanish phrase from the webpage.
 2. If found in `translations.json`, it types the translation.
