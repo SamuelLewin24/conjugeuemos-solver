@@ -1,12 +1,12 @@
 # Conjuguemos Bot
 
 ## This Bot:
-*Extracts phrases from conjuguemos
-*Looks up translations from a local JSON database
-*Types the answer found in the local DB (instead of pasting)
-*Submits the answer and checks correctness
-*Updates the database if a new correct answer is found
-*Logs errors, and quits when something goes wrong
+* Extracts phrases from conjuguemos
+* Looks up translations from a local JSON database
+* Types the answer found in the local DB (instead of pasting)
+* Submits the answer and checks correctness
+* Updates the database if a new correct answer is found
+* Logs errors, and quits when something goes wrong
 
 ## Installation
 
