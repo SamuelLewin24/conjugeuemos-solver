@@ -33,7 +33,7 @@ The bot connects to an **already open Chrome browser**. To do this:
 
 Run python file to open chrome in debug mode:
   ```sh
-  pyhotn launch_chrome_debug.py
+  python launch_chrome_debug.py
   ```
 
 Alternatively, run manually:
