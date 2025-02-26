@@ -129,7 +129,7 @@
 7. Run code
 8. Repeatedly click on the check answer button when the input feild is filled
 
-## Manually add Vocab and answers
+## ✏️ Manually write Vocab and answers to localStorage
 1. Open Chrome
 2. Open Conjugeuemos (you dont necessarily need to be on an assignment)
 3. Right click ---> inspect element ---> Console
