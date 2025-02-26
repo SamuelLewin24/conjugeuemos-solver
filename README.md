@@ -13,7 +13,7 @@
 2. Open Conjugeuemos
 3. Open desired assignment
 4. type some random phrase into input feild and get the question inccorect 
-  (yes this is required, the code sucks but im not fixing it)
+(yes this is required)
 5. Right click ---> inspect element ---> Console
 6. Copy and paste the following code into Console:
 ```
@@ -100,9 +100,10 @@
 
 ## Things to Note:
 * The bot waits 2 seconds before filling the input feild
-- this is to avoid conjugeuemos saying you finished the questions instantly
+  - this is to avoid conjugeuemos saying you finished the questions instantly
 * The bot will input "idk" if it doesn't have the answer saved in website storage
-- just continue to click through if this happends, it will record the correct answer for next time
+  - just continue to click through if this happends, it will record the correct answer for next time
+* The code sucks but im not fixing it
 
 ## Troubleshooting
 
