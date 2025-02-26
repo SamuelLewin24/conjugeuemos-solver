@@ -15,88 +15,171 @@
 4. type some random phrase into input feild and get the question inccorect 
   - (yes this is required)
 5. Right click ---> inspect element ---> Console
-6. Copy and paste the following code into Console:
+6. Copy and paste the code from "bot_v3.js" into Console:
 ```
 (async function() {
-    const maxIterations = 200;
+  const maxIterations = 200;
 
-    for (let i = 0; i < maxIterations; i++) {
-        try {
-            function getQuestionInput() {
-                const query = document.querySelector("#question-input");
-                const pronounInput = document.querySelector("#pronoun-input");
-                const verbInput = document.querySelector("#verb-input");
+  // Function to standardize the question input by removing names and replacing them with ___
+  function standardizePhrase(phrase) {
+      const names = ["Angel", "Juan", "Carlitos", "Diego", "Damian", "Elena", "Gabriel", "Jorge", "Liliana", "Luis", "Luna", "Ana", "Mia", "Carolina", "Natalia", "Pablo", "Catalina", "Sofia", "Pedro"];
+      const regex = new RegExp(`\\b(${names.join("|")})\\b`, "gi");
+      return phrase.replace(regex, "___").replace(/\s+/g, " ").trim();
+  }
 
-                if (query) {
-                    return query.textContent.trim();
-                } else if (pronounInput && verbInput) {
-                    return `${pronounInput.textContent.trim()} ${verbInput.textContent.trim()}`;
-                } else {
-                    return null;
-                }
-            }
+  for (let i = 0; i < maxIterations; i++) {
+      try {
+          function getQuestionInput() {
+              const query = document.querySelector("#question-input");
+              const pronounInput = document.querySelector("#pronoun-input");
+              const verbInput = document.querySelector("#verb-input");
 
-            let questionInput = getQuestionInput();
-            if (!questionInput) {
-                console.error("Question input not found.");
-                continue; 
-                }
-            console.log(`Current question: ${questionInput}`);
+              if (query) {
+                  return query.textContent.trim();
+              } else if (pronounInput && verbInput) {
+                  return `${pronounInput.textContent.trim()} ${verbInput.textContent.trim()}`;
+              } else {
+                  return null;
+              }
+          }
 
-            let storedData = JSON.parse(localStorage.getItem("vocab") || "{}");
+          let questionInput = getQuestionInput();
+          if (!questionInput) {
+              console.error("Question input not found.");
+              continue; 
+          }
 
-            const inputBox = document.querySelector("#assignment-answer-input");
-            if (!inputBox) {
-                console.error("Input box not found.");
-                continue; 
-            }
+          let standardizedQuestion;
+          if (document.querySelector("#pronoun-input") && document.querySelector("#verb-input")) {
+              // Standardize the question input by removing names if it involves pronoun and verb input
+              standardizedQuestion = standardizePhrase(questionInput);
+          } else {
+              // Use the whole phrase as it is if it only uses the query input
+              standardizedQuestion = questionInput;
+          }
 
-            if (storedData[questionInput]) {
-                inputBox.value = storedData[questionInput];
-                console.log("Found answer in DB. Setting input to the correct answer.");
-            } else {
-                inputBox.value = "idk";
-                console.log("Answer not found in DB. Setting input to 'idk'.");
-            }
+          console.log(`Current question: ${standardizedQuestion}`);
 
-            await new Promise(resolve => document.addEventListener("click", resolve, { once: true }));
+          let storedData = JSON.parse(localStorage.getItem("vocab") || "{}");
 
-            await new Promise(resolve => setTimeout(resolve, 2000));
+          const inputBox = document.querySelector("#assignment-answer-input");
+          if (!inputBox) {
+              console.error("Input box not found.");
+              continue; 
+          }
 
-            let newQuestionInput = getQuestionInput();
-            if (!newQuestionInput) {
-                console.error("New question input not found.");
-                continue;
-            }
-            console.log(`New question: ${newQuestionInput}`);
+          if (storedData[questionInput]) {
+              inputBox.value = storedData[questionInput];
+              console.log("Found answer in DB for the full phrase. Setting input to the correct answer.");
+          } else if (storedData[standardizedQuestion]) {
+              inputBox.value = storedData[standardizedQuestion];
+              console.log("Found answer in DB for the standardized phrase. Setting input to the correct answer.");
+          } else {
+              inputBox.value = "idk";
+              console.log("Answer not found in DB. Setting input to 'idk'.");
+          }
 
-            const newIncorrectBox = document.querySelector(".js-bubble.coqui-test-bubble.incorrect");
-            if (!newIncorrectBox || getComputedStyle(newIncorrectBox).display !== "block") {
-                console.log("No incorrect box found or it is not displayed. Assuming the answer was correct.");
-                continue; 
-            }
+          await new Promise(resolve => document.addEventListener("click", resolve, { once: true }));
 
-            let correctAnswer;
-            try {
-                correctAnswer = newIncorrectBox.querySelector("span").textContent.trim();
-                console.log(`Correct answer found: ${correctAnswer}`);
-            } catch (error) {
-                console.error("Error finding the correct answer in the incorrect box:", error);
-                continue;
-            }
+          await new Promise(resolve => setTimeout(resolve, 500));
 
-            storedData[newQuestionInput] = correctAnswer;
-            localStorage.setItem("vocab", JSON.stringify(storedData));
+          let newQuestionInput = getQuestionInput();
+          if (!newQuestionInput) {
+              console.error("New question input not found.");
+              continue;
+          }
 
-            console.log("Updated localStorage:", localStorage.getItem("vocab"));
-        } catch (error) {
-            console.error("An unexpected error occurred:", error);
-        }
-    }
+          let newStandardizedQuestion;
+          if (document.querySelector("#pronoun-input") && document.querySelector("#verb-input")) {
+              // Standardize the new question input by removing names if it involves pronoun and verb input
+              newStandardizedQuestion = standardizePhrase(newQuestionInput);
+          } else {
+              // Use the whole phrase as it is if it only uses the query input
+              newStandardizedQuestion = newQuestionInput;
+          }
+
+          console.log(`New question: ${newStandardizedQuestion}`);
+
+          const newIncorrectBox = document.querySelector(".js-bubble.coqui-test-bubble.incorrect");
+          if (!newIncorrectBox || getComputedStyle(newIncorrectBox).display !== "block") {
+              console.log("No incorrect box found or it is not displayed. Assuming the answer was correct.");
+              continue; 
+          }
+
+          let correctAnswer;
+          try {
+              correctAnswer = newIncorrectBox.querySelector("span").textContent.trim();
+              console.log(`Correct answer found: ${correctAnswer}`);
+          } catch (error) {
+              console.error("Error finding the correct answer in the incorrect box:", error);
+              continue;
+          }
+
+          storedData[newQuestionInput] = correctAnswer;
+          storedData[newStandardizedQuestion] = correctAnswer;
+          localStorage.setItem("vocab", JSON.stringify(storedData));
+
+          console.log("Updated localStorage:", localStorage.getItem("vocab"));
+      } catch (error) {
+          console.error("An unexpected error occurred:", error);
+      }
+  }
 })();
 ```
 7. Run code
 8. Repeatedly click on the check answer button when the input feild is filled
+
+## Manually add Vocab and answers
+1. Open Chrome
+2. Open Conjugeuemos (you dont necessarily need to be on an assignment)
+3. Right click ---> inspect element ---> Console
+4. Paste the code from "Manual_Vocab_Input.js" into the console
+```
+(function() {
+  // Standardizes names and replaces with "___"
+  function standardizePhrase(phrase) {
+      const names = ["Angel", "Juan", "Carlitos", "Diego", "Damian", "Elena", "Gabriel", "Jorge", "Liliana", "Luis", "Luna", "Ana", "Mia", "Carolina", "Natalia", "Pablo", "Pedro"];
+      const regex = new RegExp(`\\b(${names.join("|")})\\b`, "gi");
+      return phrase.replace(regex, "___").replace(/\s+/g, " ").trim();
+  }
+
+  function promptForInput(message) {
+      return new Promise((resolve) => {
+          const input = prompt(message);
+          resolve(input);
+      });
+  }
+
+  async function main() {
+      let storedData = JSON.parse(localStorage.getItem("vocab") || "{}");
+
+      while (true) {
+          const phrase = await promptForInput("Enter a phrase (or type 'STOP' to quit):");
+
+          if (phrase === "STOP") {
+              console.log("Stopping the script.");
+              break;
+          }
+
+          const standardizedPhrase = standardizePhrase(phrase);
+
+          const correctAnswer = await promptForInput(`Enter the correct answer for the phrase "${phrase}":`);
+
+          storedData[phrase] = correctAnswer;
+          storedData[standardizedPhrase] = correctAnswer;
+
+          localStorage.setItem("vocab", JSON.stringify(storedData));
+
+          console.log("Updated localStorage:", localStorage.getItem("vocab"));
+      }
+  }
+
+  main().catch(console.error);
+})();
+```
+5. Type in vocab phrase, followed by correct translation to said vocab phrase
+6. Repeat untill finished inputing vocab phrases
+7. Type "STOP" in all caps into the vocab phrase input feild to stop
 
 ## 📝 Things to Note:
 * The bot waits 2 seconds before filling the input feild
