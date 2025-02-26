@@ -1,22 +1,3 @@
-# Conjuguemos Bot
-- automates your conjugeuemos
-
-## This Bot:
-* Does your spanish vocab for you
-* Thats really all it does
-
-## How to use the bot:
-
-(This bot is designed such that someone with 0 computer knowledge could use it)
-
-1. Open Chrome
-2. Open Conjugeuemos
-3. Open desired assignment
-4. type some random phrase into input feild and get the question inccorect 
-- (yes this is required, the code sucks but im not fixing it)
-5. Right click ---> inspect element ---> Console
-6. Copy and paste the following code into Console:
-```
 (async function() {
     const maxIterations = 200;
 
@@ -94,17 +75,3 @@
         }
     }
 })();
-```
-7. Run code
-8. Repeatedly click on the check answer button when the input feild is filled
-
-## Things to Note:
-* The bot waits 2 seconds before filling the input feild
-- this is to avoid conjugeuemos saying you finished the questions instantly
-* The bot will input "idk" if it doesn't have the answer saved in website storage
-- just continue to click through if this happends, it will record the correct answer for next time
-
-## Troubleshooting
-
-### Bot Doesn't Work:
-- Do the assignment manually you lazy cheater
