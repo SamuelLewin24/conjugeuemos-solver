@@ -1,5 +1,5 @@
 # Conjuguemos Bot
-- automates your conjugeuemos
+- A bot that automates your conjugeuemos
 
 ## This Bot:
 * Does your spanish vocab for you
@@ -13,7 +13,7 @@
 2. Open Conjugeuemos
 3. Open desired assignment
 4. type some random phrase into input feild and get the question inccorect 
-- (yes this is required, the code sucks but im not fixing it)
+  (yes this is required, the code sucks but im not fixing it)
 5. Right click ---> inspect element ---> Console
 6. Copy and paste the following code into Console:
 ```
