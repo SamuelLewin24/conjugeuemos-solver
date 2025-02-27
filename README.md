@@ -3,7 +3,7 @@
 
 ## 📝 This Bot:
 * Does your spanish vocab for you
-  * Thats really all it does
+  - Thats really all it does
 
 ## ✅ How to use the bot:
 
@@ -182,13 +182,13 @@
 7. Type "STOP" in all caps into the vocab phrase input feild to stop
 
 ## 📝 Things to Note:
-* The bot waits 2 seconds before filling the input feild
+* The bot waits a little bit before filling the input feild
   - this is to avoid conjugeuemos saying you finished the questions instantly
 * The bot will input "idk" if it doesn't have the answer saved in website storage
   - just continue to click through if this happends, it will record the correct answer for next time
 * The code sucks but I'm not fixing it
 
-## ⚠️ Troubleshooting
+## ⚠️ Troubleshooting:
 
-### ❌ Bot Doesn't Work:
+### ❌ Bot Doesn't Work
 - Do the assignment manually you lazy cheater
