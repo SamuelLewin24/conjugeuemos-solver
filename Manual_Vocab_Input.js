@@ -17,6 +17,9 @@
       let storedData = JSON.parse(localStorage.getItem("vocab") || "{}");
 
       while (true) {
+
+          console.log("Note: for any questions regarding names type the names as: ___ (3 underscores)")
+          console.log("ex: Sofia y Juan ser ---> ___ y ___ ser (Do not replace yo, tu, ect, just names")
           const phrase = await promptForInput("Enter a phrase (or type 'STOP' to quit):");
 
           if (phrase === "STOP") {
