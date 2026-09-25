@@ -1,3 +1,10 @@
+
+# PLEASE NOTE:
+This project is now deprecated and is only up for record of this project and too resume larp, I have not worked since freshman year and since conjuguemos updated their api and overall user interface this project no longer works, I will not be updating this to work going forward as i am lazy and have better things to do with my life. Thanks for your understanding (or not idrc) - Sam
+
+
+
+
 # 🤖 Conjuguemos Bot
 - A bot that automates your conjugeuemos
 
